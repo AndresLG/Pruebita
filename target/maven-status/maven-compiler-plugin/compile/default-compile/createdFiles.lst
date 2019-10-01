@@ -1,0 +1,4 @@
+model\PersonaM.class
+controller\PersonaC.class
+dao\conexion.class
+dao\PersonaD.class

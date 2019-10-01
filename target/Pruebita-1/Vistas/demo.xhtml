@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TESTING</title>
+    </h:head>
+    <h:body>
+        <h1><center>PERSONA</center></h1>
+        <br/>
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true"  life="1000"/>  
+            <p:panelGrid columns="2">
+                <h:outputLabel value="NOMBRE"/>
+                <p:inputText value="#{personaC.persona.NOMPER}" placeholder="Nombres">
+                    <p:keyFilter regEx="/[a-z áéíóú]/i"/>
+                </p:inputText>
+                <h:outputLabel value="APELLIDOS"/>
+                <p:inputText value="#{personaC.persona.APEPER}" placeholder="Apellidos">
+                    <p:keyFilter regEx="/[a-z áéíóú]/i"/>
+                </p:inputText>
+                <h:outputLabel value="DNI"/>
+                <p:inputText value="#{personaC.persona.DNIPER}" placeholder="Dni" maxlength="8" >
+                    <p:keyFilter regEx="/[\d\-]/"/>
+                </p:inputText>
+                <h:outputLabel value="CELULAR"/>
+                <p:inputText value="#{personaC.persona.CELPER}" placeholder="Celular" maxlength="9" >
+                    <p:keyFilter regEx="/[\d\-]/"/>
+                </p:inputText>
+                <h:outputLabel value="EMAIL"/>
+                <p:inputText value="#{personaC.persona.EMAPER}" placeholder="Email" validatorMessage="ingrese correo electrónico válido">
+                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                </p:inputText>
+                <p:commandButton actionListener="#{personaC.add()}" update="form :FormTblPersona:tblPersona"  value="REGISTRAR" action="#{personaC.limpiar()}" />
+            </p:panelGrid>
+        </h:form>
+        <br/>
+        <h:form id="FormTblPersona">
+            <p:dataTable id="tblPersona"  
+                         value="#{personaC.lstPersona}"
+                         var="persona"
+                         selectionMode="single"
+                         selection="#{personaC.selectedPersona}"
+                         rowKey="#{persona.CODPER}"
+                         rows="10" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {PageLinks} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15" reflow="true">
+                <p:column headerText="#">
+                    <center><p:outputLabel value="#{persona.CODPER}"/></center>
+                </p:column>
+                <p:column headerText="NOMBRE">
+                    <center><p:outputLabel value="#{persona.NOMPER}"/></center>
+                </p:column>
+                <p:column headerText="APELLIDOS">
+                    <center><p:outputLabel value="#{persona.APEPER}"/></center>
+                </p:column>
+                <p:column headerText="DNI">
+                    <center><p:outputLabel value="#{persona.DNIPER}"/></center>
+                </p:column>
+                <p:column headerText="CELULAR">
+                    <center><p:outputLabel value="#{persona.CELPER}"/></center>
+                </p:column>
+                <p:column headerText="EMAIL">
+                    <center><p:outputLabel value="#{persona.EMAPER}"/></center>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:body>
+</html>
+
